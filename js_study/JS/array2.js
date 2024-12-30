@@ -35,11 +35,11 @@ const users3 = users.map(user => {
 
         return{
 
-            ...user,
-            userName: "ddd",        // userName을 "ddd"로 변경
+            ...user,    // 기존 user은 그대로 복사하고
+            userName: "ddd",        // userName이 "bbb"인 user을 "ddd"로 변경
         }; 
     }
-    // 그 외의 user은 반환
+    // 그 외의 user는 변경없이 반환
     return user;        
 })
 

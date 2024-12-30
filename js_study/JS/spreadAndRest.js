@@ -11,6 +11,7 @@ const obj2 = {
 
 /*      
         비구조 할당 (구조분해)
+        객체나 배열을 쉽게 분해하여 그 값을 변수에 할당하는 기능
 */
 const {data1: d1, data2: d2} = obj;
 console.log(d1, d2);    // d1 10
