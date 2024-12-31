@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .img-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                margin: 200px auto;
+                border: 1px solid #222222;
+                border-radius: 50%;
+                width: 200px;
+                height: 200px;
+                overflow: hidden;
+                cursor: pointer;
+                
+                & > img {
+                    height: 100%;
+                }
+            }
+            
+            </style>
+        </head>
+        <body>
+            <div class ="img-box">
+                <img src="" alt="">
+            </div>
+
+    <script>
+        let currentIndex = 0;
+        
+
+        const urlList = [
+            "https://velog.velcdn.com/images/ymh0951/post/ec877c43-d72f-45b3-8c37-46be92d92fa5/image.png",
+        "https://blog.kakaocdn.net/dn/vDiAt/btrye25x2Sl/KbFsBOH5sCt3AWLVig3xS0/img.jpg",
+        "https://velog.velcdn.com/images/yeonjin1357/post/9be9ed02-2810-428d-b12e-8030a3733995/image.jpeg",
+        "https://ems.elancer.co.kr/99_upload/Append/T_Blog/editor/2023080711394394942.jpg",
+    ]
+
+    function handleImgChageOnClick(){
+        if(currentIndex < urlList.length -1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+        const imgElement = document.querySelector(".img-box > img");
+        imgElement.src = urlList[currentIndex]
+
+    }
+
+    window.onload = () => {
+        const imgElement = document.querySelector(".img-box > img");
+        imgElement.src = urlList[currentIndex]
+        const imgBoxElement = document.querySelector(".img-box");
+        imgBoxElement.onclick = handleImgChageOnClick;
+        }
+
+   
+    </script>
+</body>
+</html>

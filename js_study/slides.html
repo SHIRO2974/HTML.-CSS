@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .slide {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        margin: 100px auto;
+        border: 1px solid #dbdbdb;
+        width: 1200px;
+        height: 400px;
+        overflow: hidden;
+
+        & > img {
+            height: 100%;
+        }
+
+        & > .prev-button,
+        & > .next-button {
+            position: absolute;
+            transform: translateY(-50%);
+            top: 50%;
+            border: none;
+            padding: 10px;
+            background-color: transparent;
+            cursor: pointer;
+            
+            & > svg {
+                height: 100px;
+            }
+        }
+
+        & > .prev-button{
+            left: 50px;
+        }
+
+        & > .next-button{
+            right: 50px;
+        }
+        
+    }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="checkbox" id="fied"> 
+        <label for="">고정</label>
+
+    </div>
+    <div class="slide">
+        <button class="prev-button">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill="" data-darkreader-inline-stroke="" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;"><path fill-rule="evenodd" d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223"></path></svg>
+        </button>
+        <img src="" alt="">
+        <button class="next-button">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="200px" width="200px" xmlns="http://www.w3.org/2000/svg" data-darkreader-inline-fill="" data-darkreader-inline-stroke="" style="--darkreader-inline-fill: currentColor; --darkreader-inline-stroke: currentColor;"><path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671"></path></svg>
+        </button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const urlList =[
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7OrtM7FfDgFfgOmRqL4R__bU5cjx1ltwy1A&s",
+        "https://velog.velcdn.com/images/ymh0951/post/ec877c43-d72f-45b3-8c37-46be92d92fa5/image.png",
+        "https://blog.kakaocdn.net/dn/vDiAt/btrye25x2Sl/KbFsBOH5sCt3AWLVig3xS0/img.jpg",
+        "https://velog.velcdn.com/images/bbaekddo/post/379866a3-c83d-4943-9bc5-2c346596d873/image.jpeg",
+    ];
+    
+    function handleprevOnClick() {  
+
+        const fixedCheckBox = document.querySelector("#fixed");
+
+        if(currentIndex > 0) {
+
+            currentIndex --;
+
+        }else{
+
+            if(fixedCheckBox.checked) {
+
+                return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
+            }
+
+            currentIndex = urlList.length -1;   // 첫 번째 이미지에서 이전 버튼을 클릭하면 마지막 이미지로 이동
+        }
+
+        setSlideImgSrc(urlList[currentIndex])
+    }
+
+    function handleNextOnClick() {
+
+        const fixedCheckBox = document.querySelector("#fixed"); // 체크박스 상태 확인
+
+        if(currentIndex < urlList.length -1) {  // currentIndex가 urlList.length -1
+            currentIndex ++;    // 이미지를 넘긴다
+
+        }else {
+
+            if(fixedCheckBox.checked) {
+
+                return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
+            }
+
+            currentIndex = 0;   // 마지막 이미지에서 다음 버튼을 클릭하면 첫 번째 이미지로 이동
+        }
+        setSlideImgSrc(urlList[currentIndex]);
+    }
+
+    function setSlideImgSrc(src) {
+        const slideImgElemont = document.querySelector(".slide > img");  //슬라이드 안에 있는 이미지를 slideImgElemont 에 넣는다
+        slideImgElemont.src = src;   // 0번째 순서부터
+    }
+
+    window.onload = () => {
+        
+        const prevButton = document.querySelector(".prev-button");
+        prevButton.onclick = handleprevOnClick;     // 버튼을 클릭시 생기는 이벤트
+        
+        const nextbutton = document.querySelector(".next-button");
+        nextbutton.onclick = handleNextOnClick;     // 버튼을 클릭시 생기는 이벤트
+        
+        setSlideImgSrc(urlList[currentIndex]);
+    }
+    </script>
+</body>
+</html>
