@@ -72,40 +72,40 @@
         "https://velog.velcdn.com/images/bbaekddo/post/379866a3-c83d-4943-9bc5-2c346596d873/image.jpeg",
     ];
     
-    function handleprevOnClick() {  
+        function handleprevOnClick() {  
 
-        const fixedCheckBox = document.querySelector("#fixed");
+            const fixedCheckBox = document.querySelector("#fixed");
+            
+                        if(fixedCheckBox.checked) {
+            
+                            return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
+                        }
 
-        if(currentIndex > 0) {
+            if(currentIndex > 0) {
 
-            currentIndex --;
+                currentIndex --;
 
-        }else{
+            }else{
 
-            if(fixedCheckBox.checked) {
-
-                return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
+                currentIndex = urlList.length -1;   // 첫 번째 이미지에서 이전 버튼을 클릭하면 마지막 이미지로 이동
             }
 
-            currentIndex = urlList.length -1;   // 첫 번째 이미지에서 이전 버튼을 클릭하면 마지막 이미지로 이동
+            setSlideImgSrc(urlList[currentIndex])
         }
-
-        setSlideImgSrc(urlList[currentIndex])
-    }
 
     function handleNextOnClick() {
 
         const fixedCheckBox = document.querySelector("#fixed"); // 체크박스 상태 확인
+        
+                    if(fixedCheckBox.checked) {
+        
+                        return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
+                    }
 
         if(currentIndex < urlList.length -1) {  // currentIndex가 urlList.length -1
             currentIndex ++;    // 이미지를 넘긴다
 
         }else {
-
-            if(fixedCheckBox.checked) {
-
-                return; // 리턴 시켜버리면 이 함수를 벗어나기 때문에 고정이 된다
-            }
 
             currentIndex = 0;   // 마지막 이미지에서 다음 버튼을 클릭하면 첫 번째 이미지로 이동
         }
