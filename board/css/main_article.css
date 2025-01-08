@@ -5,7 +5,7 @@
     padding: 10px 20px 30px ;
 
     & > input,
-    & > textarea {
+    & > textare  {
 
         box-sizing: border-box;
         margin-bottom: 10px;

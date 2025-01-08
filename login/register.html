@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/login-header.css">
+    <link rel="stylesheet" href="./css/main-login.css">
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+    <div class= "root">
+        <div class= "container">
+
+            <header class="login-header">
+                <h1 class="login-logo">Register</h1>
+            </header>
+
+            <main class="main-login">
+                <input type="text" name="id" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <button class="register-button">Login</button>
+                <p>
+                    Already have an account?<span><a href="#" class="login-buttons">Log in</a></span>
+                </p>
+            </main>
+        </div>
+    </div>
+    <script>
+
+        function loginButtons() {
+            
+            alert("로그인 페이지로 이동");
+            location.href = "./login.html";
+        }
+        
+        let register = {
+            id: 0,
+            username: "",
+            password: "",
+        };
+        
+        function saveRegister() {
+            let registerDatas = !!localStorage.getItem("registerDatas")
+            ? JSON.parse(localStorage.getItem("registerDatas"))
+            : [];
+
+            const usernameInput = document.querySelector('[name="id"]');
+            const passwordInput = document.querySelector('[name="password"]');
+
+            register.username = usernameInput.value;
+            register.password = passwordInput.value;
+
+            if (registerDatas.length > 0) {
+                
+                register.id = registerDatas[registerDatas.length -1].id +1;
+            }
+
+
+            registerDatas = [
+
+                ...registerDatas,
+                register,
+            ]
+
+            localStorage.setItem("registerDatas", JSON.stringify(registerDatas));
+
+            alert("회원가입 성공! 로그인 페이지로 이동합니다.")
+            location.href = "./login.html";
+        }
+
+        window.onload = () => {
+
+            const loginButton = document.querySelector(".login-buttons");
+            loginButton.onclick = loginButtons;
+
+            const registerButton = document.querySelector(".register-button");
+            registerButton.onclick = saveRegister;
+        }
+    </script>
+</body>
+</html>

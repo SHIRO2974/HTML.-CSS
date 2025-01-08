@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/login-header.css">
+    <link rel="stylesheet" href="./css/main-login.css">
+</head>
+<body>
+    <div class= "root">
+        <div class= "container">
+
+            <header class="login-header">
+                <h1 class="login-logo">Login</h1>
+            </header>
+
+            <main class="main-login">
+                <input type="text" name="id" placeholder="Userame">
+                <input type="password" name="password" placeholder="Password">
+                <button class="login-button">Login</button>
+                <p>
+                    Don't have an account?<span><a href="#" class="register-Signup-button">Sign up</a></span>
+                </p>
+            </main>
+        </div>
+    </div>
+    <script>
+        
+        function signupButton() {
+            
+            alert("회원가입 페이지로 이동");
+            location.href = "./register.html";
+        }
+
+        function login() {
+
+            const usernameInput = document.querySelector('[name="id"]');
+            const passwordInput = document.querySelector('[name="password"]');
+
+            const enteredUsername = usernameInput.value;
+            const enteredPassword = passwordInput.value;
+
+            let registerDatas = localStorage.getItem("registerDatas");
+            registerDatas = registerDatas ? JSON.parse(registerDatas) : [];
+
+            const user = registerDatas.find(user => user.username === enteredUsername && user.password === enteredPassword);
+
+            if (user) {
+                
+                alert("로그인 성공!");
+
+        } else {
+                
+                alert("로그인 실패!");
+            }
+        }
+
+        window.onload = () => {
+            
+            const registerButton = document.querySelector(".register-Signup-button")
+            registerButton.onclick = signupButton;
+
+            const loginButton = document.querySelector(".login-button");
+            loginButton.onclick = login;
+        }
+    </script>
+</body>
+</html>
